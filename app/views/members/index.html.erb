@@ -1,0 +1,36 @@
+
+<h1>メンバー検索</h1>
+<%= search_form_for(@q, url:root_path) do |f| %>
+  <p>
+    <%= f.label :area, 'エリア' %>
+    <%= f.search_field :area_cont %>
+  </p>
+  <p>
+    <%= f.label :part, 'パート' %>
+    <%= f.select :part_eq, 指定なし: '', ボーカル: 'ボーカル', ギター: 'ギター', ベース: 'ベース' %>
+  </p>
+
+  <p>
+    <%= f.label :gender, '性別' %>
+    <%= f.radio_button :gender_eq, '', {:checked => true} %>指定なし
+    <%= f.radio_button :gender_eq, '男' %>男性
+    <%= f.radio_button :gender_eq, '女' %>女性
+  </p>
+  <p>
+    <%= f.label :age, '年齢' %>
+    <%= f.number_field :age_gteq %>以上〜
+    <%= f.number_field :age_lt %>未満
+  </p>
+
+  <%= f.submit %>
+<% end %>
+<table>
+  <% @members.each do |m| %>
+  <tr>
+    <td><%= m.area %></td>
+    <td><%= m.part %></td>
+    <td><%= m.age %>歳</td>
+    <td><%= m.gender %>性</td>
+  </tr>
+  <% end %>
+</table>
